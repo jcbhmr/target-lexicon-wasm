@@ -1,0 +1,404 @@
+package jcbhmr:target-lexicon@0.13.1;
+
+interface types {
+    enum size {
+        %u8,
+        %u16,
+        %u32,
+        %u64,
+    }
+    size-bits: func(self: size) -> u8;
+    size-bytes: func(self: size) -> u8;
+
+    enum c-data-model {
+        lp32,
+        ilp32,
+        llp64,
+        lp64,
+        ilp64,
+    }
+    c-data-model-pointer-width: func(self: c-data-model) -> size;
+    c-data-model-short-size: func(self: c-data-model) -> size;
+    c-data-model-int-size: func(self: c-data-model) -> size;
+    c-data-model-long-size: func(self: c-data-model) -> size;
+    c-data-model-long-long-size: func(self: c-data-model) -> size;
+    c-data-model-float-size: func(self: c-data-model) -> size;
+    c-data-model-double-size: func(self: c-data-model) -> size;
+
+    record default-to-host {
+        a: triple,
+    }
+    default-to-host-default: func() -> default-to-host;
+
+    record default-to-unknown {
+        a: triple,
+    }
+    default-to-unknown-default: func() -> default-to-unknown;
+
+    triple-serialize-json: func(self: triple) -> result<string, string>;
+    triple-deserialize-json: func(json: string) -> result<triple, string>;
+
+    variant parse-error {
+        unrecognized-architecture(string),
+        unrecognized-vendor(string),
+        unrecognized-operating-system(string),
+        unrecognized-environment(string),
+        unrecognized-binary-format(string),
+        unrecognized-field(string),
+    }
+    parse-error-to-string: func(self: parse-error) -> string;
+
+    variant architecture {
+        unknown,
+        arm(arm-architecture),
+        amdgcn,
+        aarch64(aarch64-architecture),
+        asmjs,
+        avr,
+        bpfeb,
+        bpfel,
+        hexagon,
+        x8632(x8632-architecture),
+        m68k,
+        loongarch64,
+        mips32(mips32-architecture),
+        mips64(mips64-architecture),
+        msp430,
+        nvptx64,
+        pulley32,
+        pulley64,
+        pulley32be,
+        pulley64be,
+        powerpc,
+        powerpc64,
+        powerpc64le,
+        riscv32(riscv32-architecture),
+        riscv64(riscv64-architecture),
+        s390x,
+        sparc,
+        sparc64,
+        sparcv9,
+        wasm32,
+        wasm64,
+        x8664,
+        x8664h,
+        xtensa,
+        clever(bool),
+    }
+
+    enum arm-architecture {
+        arm,
+        armeb,
+        armv4,
+        armv4t,
+        armv5t,
+        armv5te,
+        armv5tej,
+        armv6,
+        armv6j,
+        armv6k,
+        armv6z,
+        armv6kz,
+        armv6t2,
+        armv6m,
+        armv7,
+        armv7a,
+        armv7k,
+        armv7ve,
+        armv7m,
+        armv7r,
+        armv7s,
+        armv8,
+        armv8a,
+        armv81a,
+        armv82a,
+        armv83a,
+        armv84a,
+        armv85a,
+        armv8mbase,
+        armv8mmain,
+        armv8r,
+        armebv7r,
+        thumbeb,
+        thumbv4t,
+        thumbv5te,
+        thumbv6m,
+        thumbv7a,
+        thumbv7em,
+        thumbv7m,
+        thumbv7neon,
+        thumbv8mbase,
+        thumbv8mmain,
+    }
+
+    enum aarch64-architecture {
+        aarch64,
+        aarch64be,
+    }
+
+    arm-architecture-is-thumb: func(self: arm-architecture) -> bool;
+    arm-architecture-pointer-width: func(self: arm-architecture) -> pointer-width;
+    arm-architecture-endianness: func(self: arm-architecture) -> endianness;
+    arm-architecture-into-str: func(self: arm-architecture) -> string;
+
+    aarch64-architecture-is-thumb: func(self: aarch64-architecture) -> bool;
+    aarch64-architecture-pointer-width: func(self: aarch64-architecture) -> pointer-width;
+    aarch64-architecture-endianness: func(self: aarch64-architecture) -> endianness;
+    aarch64-architecture-into-str: func(self: aarch64-architecture) -> string;
+
+    enum riscv32-architecture {
+        riscv32,
+        riscv32gc,
+        riscv32i,
+        riscv32im,
+        riscv32ima,
+        riscv32imac,
+        riscv32imafc,
+        riscv32imc,
+    }
+    riscv32-architecture-into-str: func(self: riscv32-architecture) -> string;
+
+    enum riscv64-architecture {
+        riscv64,
+        riscv64gc,
+        riscv64imac,
+    }
+    riscv64-architecture-into-str: func(self: riscv64-architecture) -> string;
+
+    enum x8632-architecture {
+        i386,
+        i586,
+        i686,
+    }
+    x8632-architecture-into-str: func(self: x8632-architecture) -> string;
+
+    enum mips32-architecture {
+        mips,
+        mipsel,
+        mipsisa32r6,
+        mipsisa32r6el,
+    }
+    mips32-architecture-into-str: func(self: mips32-architecture) -> string;
+
+    enum mips64-architecture {
+        mips64,
+        mips64el,
+        mipsisa64r6,
+        mipsisa64r6el,
+    }
+    mips64-architecture-into-str: func(self: mips64-architecture) -> string;
+
+    variant custom-vendor {
+        owned(string),
+        %static(string),
+    }
+    custom-vendor-as-str: func(self: custom-vendor) -> string;
+    custom-vendor-equals: func(self: custom-vendor, other: custom-vendor) -> bool;
+
+    variant vendor {
+        unknown,
+        amd,
+        apple,
+        espressif,
+        experimental,
+        fortanix,
+        ibm,
+        kmc,
+        nintendo,
+        nvidia,
+        pc,
+        rumprun,
+        sun,
+        uwp,
+        wrs,
+        custom(custom-vendor),
+    }
+    vendor-as-str: func(self: vendor) -> string;
+
+    record deployment-target {
+        major: u16,
+        minor: u8,
+        patch: u8,
+    }
+
+    variant operating-system {
+        unknown,
+        aix,
+        amdhsa,
+        bitrig,
+        cloudabi,
+        cuda,
+        darwin(option<deployment-target>),
+        dragonfly,
+        emscripten,
+        espidf,
+        freebsd,
+        fuchsia,
+        haiku,
+        hermit,
+        horizon,
+        hurd,
+        illumos,
+        ios(option<deployment-target>),
+        l4re,
+        linux,
+        macosx(option<deployment-target>),
+        nebulet,
+        netbsd,
+        none,
+        openbsd,
+        psp,
+        redox,
+        solaris,
+        solidasp3,
+        tvos(option<deployment-target>),
+        uefi,
+        visionos(option<deployment-target>),
+        vxworks,
+        wasi,
+        wasip1,
+        wasip2,
+        watchos(option<deployment-target>),
+        windows,
+        xros(option<deployment-target>),
+    }
+    operating-system-into-str: func(self: operating-system) -> string;
+    operating-system-is-like-darwin: func(self: operating-system) -> bool;
+
+    enum environment {
+        unknown,
+        amdgiz,
+        android,
+        androideabi,
+        eabi,
+        eabihf,
+        gnu,
+        gnuabi64,
+        gnueabi,
+        gnueabihf,
+        gnuspe,
+        gnux32,
+        gnuilp32,
+        gnullvm,
+        hermitkernel,
+        hurdkernel,
+        linuxkernel,
+        macabi,
+        musl,
+        musleabi,
+        musleabihf,
+        muslabi64,
+        msvc,
+        newlib,
+        none,
+        kernel,
+        uclibc,
+        uclibceabi,
+        uclibceabihf,
+        sgx,
+        sim,
+        softfloat,
+        spe,
+        threads,
+        ohos,
+    }
+    environment-into-str: func(self: environment) -> string;
+
+    enum binary-format {
+        unknown,
+        elf,
+        coff,
+        macho,
+        wasm,
+        xcoff,
+    }
+    binary-format-into-str: func(self: binary-format) -> string;
+
+    architecture-endianness: func(self: architecture) -> result<endianness, bool>;
+    architecture-pointer-width: func(self: architecture) -> result<pointer-width, bool>;
+    architecture-is-clever: func(self: architecture) -> bool;
+    architecture-into-str: func(self: architecture) -> string;
+
+    arm-architecture-to-string: func(self: arm-architecture) -> string;
+    
+    aarch64-architecture-to-string: func(self: aarch64-architecture) -> string;
+    
+    riscv32-architecture-to-string: func(self: riscv32-architecture) -> string;
+    
+    riscv64-architecture-to-string: func(self: riscv64-architecture) -> string;
+    
+    x8632-architecture-to-string: func(self: x8632-architecture) -> string;
+    
+    mips32-architecture-to-string: func(self: mips32-architecture) -> string;
+    
+    mips64-architecture-to-string: func(self: mips64-architecture) -> string;
+    
+    architecture-to-string: func(self: architecture) -> string;
+
+    arm-architecture-from-str: func(s: string) -> result<arm-architecture, bool>;
+
+    aarch64-architecture-from-str: func(s: string) -> result<aarch64-architecture, bool>;
+
+    riscv32-architecture-from-str: func(s: string) -> result<riscv32-architecture, bool>;
+
+    riscv64-architecture-from-str: func(s: string) -> result<riscv64-architecture, bool>;
+
+    x8632-architecture-from-str: func(s: string) -> result<x8632-architecture, bool>;
+
+    mips32-architecture-from-str: func(s: string) -> result<mips32-architecture, bool>;
+
+    mips64-architecture-from-str: func(s: string) -> result<mips64-architecture, bool>;
+
+    architecture-from-str: func(s: string) -> result<architecture, bool>;
+
+    vendor-to-string: func(self: vendor) -> string;
+    vendor-from-str: func(s: string) -> result<vendor, bool>;
+
+    operating-system-to-string: func(self: operating-system) -> string;
+    operating-system-from-str: func(s: string) -> result<operating-system, bool>;
+
+    environment-to-string: func(self: environment) -> string;
+    environment-from-str: func(s: string) -> result<environment, bool>;
+
+    binary-format-to-string: func(self: binary-format) -> string;
+    binary-format-from-str: func(s: string) -> result<binary-format, bool>;
+
+    enum endianness {
+        little,
+        big,
+    }
+
+    enum pointer-width {
+        %u16,
+        %u32,
+        %u64,
+    }
+    pointer-width-bits: func(self: pointer-width) -> u8;
+    pointer-width-bytes: func(self: pointer-width) -> u8;
+
+    enum calling-convention {
+        systemv,
+        wasmbasiccabi,
+        windowsfastcall,
+        appaleaarch64,
+    }
+
+    record triple {
+        architecture: architecture,
+        vendor: vendor,
+        operating-system: operating-system,
+        environment: environment,
+        binary-format: binary-format,
+    }
+    triple-endianness: func(self: triple) -> result<endianness, bool>;
+    triple-pointer-width: func(self: triple) -> result<pointer-width, bool>;
+    triple-default-calling-convention: func(self: triple) -> result<calling-convention, bool>;
+    triple-data-model: func(self: triple) -> result<c-data-model, bool>;
+    triple-unknown: func() -> triple;
+    triple-to-string: func(self: triple) -> string;
+    triple-from-str: func(s: string) -> result<triple, parse-error>;
+}
+
+world host {
+    export types;
+}
