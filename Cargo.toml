@@ -1,0 +1,10 @@
+[package]
+name = "target-lexicon-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+target-lexicon = "0.13.1"
+
+[patch.crates-io]
+target-lexicon = { path = "crates/target-lexicon" }
