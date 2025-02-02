@@ -73,3 +73,12 @@ Some conventions for porting Rust definitions to WIT:
 - Any `Result<T, ()>` types are replaced with `result<T, bool>` types where the boolean side is always false. WIT doesn't have a void or undefined type so this is the closest approximation.
 - Any `Result<T, impl Error>` types are replaced with `result<T, string>` types. Stringify the error message.
 - Any internal type that is exposed is instead replaced with a void type. Since WIT doesn't have void types, use an always-false boolean type instead.
+
+Try to keep this project's version tags in step with the target-lexicon project's versions. This means v1.0.0 of this project should correspond with target-lexicon v1.0.0 with the same API surface.
+
+To create a release:
+
+1. Make sure the `Cargo.toml` version field is what you want.
+2. Run the "Create a release" workflow manually.
+3. Wait for it to run to completion.
+4. Check the releases page on GitHub to see the new release.
