@@ -398,8 +398,16 @@ interface types {
     triple-unknown: func() -> triple;
     triple-to-string: func(self: triple) -> string;
     triple-from-str: func(s: string) -> result<triple, parse-error>;
+
+    host: func() -> triple;
+    architecture-host: func() -> architecture;
+    vendor-host: func() -> vendor;
+    operating-system-host: func() -> operating-system;
+    environment-host: func() -> environment;
+    binary-format-host: func() -> binary-format;
+    triple-host: func() -> triple;
 }
 
-world host {
+world target-lexicon {
     export types;
 }

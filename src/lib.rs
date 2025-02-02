@@ -1,5 +1,5 @@
 wit_bindgen::generate!({
-    world: "host",
+    world: "target-lexicon",
 });
 
 pub(crate) use exports::jcbhmr::target_lexicon::types as wasm;
@@ -16,7 +16,6 @@ pub(crate) trait IntoWasm {
 }
 
 mod data_model;
-mod host;
 mod parse_error;
 mod targets;
 mod triple;
@@ -319,6 +318,27 @@ impl exports::jcbhmr::target_lexicon::types::Guest for MyHost {
         rust::Triple::from_str(&s)
             .map(|t| t.into_wasm())
             .map_err(|e| e.into_wasm())
+    }
+    fn host() -> wasm::Triple {
+        rust::HOST.into_wasm()
+    }
+    fn architecture_host() -> wasm::Architecture {
+        rust::Architecture::host().into_wasm()
+    }
+    fn vendor_host() -> wasm::Vendor {
+        rust::Vendor::host().into_wasm()
+    }
+    fn operating_system_host() -> wasm::OperatingSystem {
+        rust::OperatingSystem::host().into_wasm()
+    }
+    fn environment_host() -> wasm::Environment {
+        rust::Environment::host().into_wasm()
+    }
+    fn binary_format_host() -> wasm::BinaryFormat {
+        rust::BinaryFormat::host().into_wasm()
+    }
+    fn triple_host() -> wasm::Triple {
+        rust::Triple::host().into_wasm()
     }
 }
 
