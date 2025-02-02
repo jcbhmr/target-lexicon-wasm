@@ -79,6 +79,6 @@ Try to keep this project's version tags in step with the target-lexicon project'
 To create a release:
 
 1. Make sure the `Cargo.toml` version field is what you want.
-2. Run the "Create a release" workflow manually.
+2. Run the "Create release" workflow manually.
 3. Wait for it to run to completion.
 4. Check the releases page on GitHub to see the new release.
