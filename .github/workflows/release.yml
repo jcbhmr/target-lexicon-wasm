@@ -2,8 +2,7 @@ name: Create release
 on:
   workflow_dispatch:
     inputs:
-      draft:
-        default: true
+      draft: {}
 jobs:
   release:
     permissions:
