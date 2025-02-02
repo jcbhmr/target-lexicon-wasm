@@ -1,0 +1,16 @@
+name: Create release
+on:
+  workflow_dispatch:
+jobs:
+  release:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo build --release
+      - id: get-version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq '.package.version' Cargo.toml
+      - run: gh release create v${{ steps.get-version.outputs.result }} ${{ inputs.draft && '--draft' || ' ' }} --generate-notes ./target/wasm32-wasi/release/*.wasm

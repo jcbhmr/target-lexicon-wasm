@@ -84,6 +84,7 @@ interface types {
         x8664h,
         xtensa,
         clever(bool),
+        zkasm,
     }
 
     enum arm-architecture {

@@ -39,6 +39,7 @@ impl IntoRust for wasm::Architecture {
             wasm::Architecture::X8664h => rust::Architecture::X86_64h,
             wasm::Architecture::Xtensa => rust::Architecture::XTensa,
             wasm::Architecture::Clever(_a) => todo!(),
+            wasm::Architecture::Zkasm => rust::Architecture::ZkAsm,
         }
     }
 }
@@ -81,6 +82,7 @@ impl IntoWasm for rust::Architecture {
             rust::Architecture::X86_64h => wasm::Architecture::X8664h,
             rust::Architecture::XTensa => wasm::Architecture::Xtensa,
             rust::Architecture::Clever(_a) => wasm::Architecture::Clever(false),
+            rust::Architecture::ZkAsm => wasm::Architecture::Zkasm,
             _ => todo!(),
         }
     }
