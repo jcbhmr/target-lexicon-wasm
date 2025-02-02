@@ -80,7 +80,7 @@ impl IntoWasm for rust::Architecture {
             rust::Architecture::X86_64 => wasm::Architecture::X8664,
             rust::Architecture::X86_64h => wasm::Architecture::X8664h,
             rust::Architecture::XTensa => wasm::Architecture::Xtensa,
-            rust::Architecture::Clever(a) => wasm::Architecture::Clever(false),
+            rust::Architecture::Clever(_a) => wasm::Architecture::Clever(false),
             _ => todo!(),
         }
     }
