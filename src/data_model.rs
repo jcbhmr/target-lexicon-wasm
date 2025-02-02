@@ -1,4 +1,4 @@
-use crate::{wasm, rust, IntoRust, IntoWasm};
+use crate::{rust, wasm, IntoRust, IntoWasm};
 
 impl IntoRust for wasm::Size {
     type RustType = rust::Size;
