@@ -30,7 +30,7 @@ triple-from-str: func(s: string) -> result<triple, parse-error>;
 Download the `target-lexicon.wasm` artifact from [the GitHub releases page](https://github.com/jcbhmr/target-lexicon-wasm/releases).
 
 ```sh
-curl --location --remote-name https://github.com/jcbhmr/target-lexicon-wasm/releases/latest/download/target-lexicon.wasm
+curl --location --remote-name https://github.com/jcbhmr/target-lexicon-wasm/releases/download/v0.13.1/target-lexicon.wasm
 ```
 
 You'll probably end up either a) downloading the `target-lexicon.wasm` WASM component at compile-time or b) vendoring the `target-lexicon.wasm` WASM component in your Git repository.
