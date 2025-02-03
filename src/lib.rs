@@ -138,7 +138,7 @@ impl exports::jcbhmr::target_lexicon::types::Guest for MyHost {
     fn custom_vendor_as_str(self_: wasm::CustomVendor) -> String {
         self_.into_rust().as_str().into()
     }
-    fn custom_vendor_equals(self_: wasm::CustomVendor, other: wasm::CustomVendor) -> bool {
+    fn custom_vendor_eq(self_: wasm::CustomVendor, other: wasm::CustomVendor) -> bool {
         self_.into_rust().eq(&other.into_rust())
     }
     fn vendor_as_str(self_: wasm::Vendor) -> String {
