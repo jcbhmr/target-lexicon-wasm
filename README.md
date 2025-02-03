@@ -49,7 +49,7 @@ You'll probably end up either a) downloading the `target-lexicon.wasm` WASM comp
 
 </table>
 
-[📚 See the full WIT API documentation](https://github.com/jcbhmr/target-lexicon-wasm/blob/main/wit/target-lexicon.wit)
+[📚 See the full WIT API documentation](https://github.com/jcbhmr/target-lexicon-wasm/blob/v0.13.1/wit/target-lexicon.wit)
 
 You can use tools like [Jco](https://github.com/bytecodealliance/jco) to generate bindings for your favorite language to the WebAssembly component. Read the development section below for more information on how some of the Rust ideas have been ported to WIT. You may wish to extend or wrap the generated bindings in more language-specific idioms.
 
@@ -79,6 +79,7 @@ Try to keep this project's version tags in step with the target-lexicon project'
 To create a release:
 
 1. Make sure the `Cargo.toml` version field is what you want.
-2. Run the "Create release" workflow manually.
-3. Wait for it to run to completion.
-4. Check the releases page on GitHub to see the new release.
+2. Change the "curl ..." and "See the full WIT API" URLs to use the new version tag that will be created.
+3. Run the "Create release" workflow manually.
+4. Wait for it to run to completion.
+5. Check the releases page on GitHub to see the new release.
