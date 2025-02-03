@@ -16,5 +16,7 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd: yq '.package.version' Cargo.toml
-      - run: cp -f ./target/wasm32-wasi/release/target_lexicon_wasm.wasm ./target-lexicon.wasm
-      - run: gh release create v${{ steps.get-version.outputs.result }} ${{ inputs.draft && '--draft' || ' ' }} --generate-notes ./target-lexicon.wasm
+      - run: |
+          release_files=$(mktemp -d)
+          cp -f ./target/wasm32-wasip2/release/target_lexicon_wasm.wasm "$release_files/target-lexicon.wasm"
+          gh release create v${{ steps.get-version.outputs.result }} ${{ inputs.draft && '--draft' || ' ' }} --generate-notes "$release_files"/*
