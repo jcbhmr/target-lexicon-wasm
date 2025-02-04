@@ -194,7 +194,7 @@ interface types {
         %static(string),
     }
     custom-vendor-as-str: func(self: custom-vendor) -> string;
-    custom-vendor-eq: func(self: custom-vendor, other: custom-vendor) -> bool;
+    custom-vendor-equals: func(self: custom-vendor, other: custom-vendor) -> bool;
 
     variant vendor {
         unknown,

@@ -73,6 +73,7 @@ Some conventions for porting Rust definitions to WIT:
 - Any `Result<T, ()>` types are replaced with `result<T, bool>` types where the boolean side is always false. WIT doesn't have a void or undefined type so this is the closest approximation.
 - Any `Result<T, impl Error>` types are replaced with `result<T, string>` types. Stringify the error message.
 - Any internal type that is exposed is instead replaced with a void type. Since WIT doesn't have void types, use an always-false boolean type instead.
+- `Eq` trait is mapped to a `equals()` method. `equals()` is more popular than `equal()`.
 
 Try to keep this project's version tags in step with the target-lexicon project's versions. This means v1.0.0 of this project should correspond with target-lexicon v1.0.0 with the same API surface.
 
