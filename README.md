@@ -38,16 +38,6 @@ You'll probably end up either a) downloading the `target-lexicon.wasm` WASM comp
 ## Usage
 
 ![WebAssembly](https://img.shields.io/badge/WebAssembly-654FF0?style=for-the-badge&logo=WebAssembly&logoColor=FFFFFF)
-![JavaScript](https://img.shields.io/badge/JavaScript-222222?style=for-the-badge&logo=JavaScript&logoColor=F7DF1E)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=Go&logoColor=FFFFFF)
-
-<div align=center><b>You're probably looking for premade ergonomic bindings for your language of choice.</b></div>
-<table align=center><td>
-
-- JavaScript: https://www.npmjs.com/package/target-lexicon
-- Go: https://pkg.go.dev/github.com/jcbhmr/go-targetlexicon
-
-</table>
 
 [📚 See the full WIT API documentation](https://github.com/jcbhmr/target-lexicon-wasm/blob/v0.13.1/wit/target-lexicon.wit)
 
